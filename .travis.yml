@@ -14,8 +14,8 @@ after_success:
    - docker build -t vor5tim/multi-client ./worker
    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
    - docker push vor5tim/multi-client
-   - docker push vor5tim/multi-server
    - docker push vor5tim/multi-nginx
+   - docker push vor5tim/multi-server
    - docker push vor5tim/multi-worker  
 
 
