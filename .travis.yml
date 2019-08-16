@@ -3,18 +3,15 @@ services:
         - docker
 before_install:
  - docker build -t vor5tim/react-test -f ./client/Dockerfile.dev ./client
- - docker build -t vor5tim/react-test -f ./client/Dockerfile.dev ./nginx
- - docker build -t vor5tim/react-test -f ./client/Dockerfile.dev ./server
- - docker build -t vor5tim/react-test -f ./client/Dockerfile.dev ./worker
 
 script:
   - docker run -e CI=true vor5tim/react-test npm run test
 
 after_success:
    - docker build -t vor5tim/multi-client ./client
-   - docker build -t vor5tim/multi-client ./nginx
-   - docker build -t vor5tim/multi-client ./server
-   - docker build -t vor5tim/multi-client ./worker
+   - docker build -t vor5tim/multi-nginx ./nginx
+   - docker build -t vor5tim/multi-server ./server
+   - docker build -t vor5tim/multi-worker ./worker
    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
    - docker push vor5tim/multi-client
    - docker push vor5tim/multi-nginx
