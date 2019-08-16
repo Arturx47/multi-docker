@@ -3,6 +3,9 @@ services:
         - docker
 before_install:
  - docker build -t vor5tim/react-test -f ./client/Dockerfile.dev ./client
+ - docker build -t vor5tim/react-test -f ./client/Dockerfile.dev ./nginx
+ - docker build -t vor5tim/react-test -f ./client/Dockerfile.dev ./server
+ - docker build -t vor5tim/react-test -f ./client/Dockerfile.dev ./worker
 
 script:
   - docker run -e CI=true vor5tim/react-test npm run test
